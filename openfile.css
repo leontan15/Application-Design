@@ -67,9 +67,7 @@ namespace randNumbFileWrite
             openRandFileDiag.Filter = "Text Files | *.txt";
             // Set file default name to text type in dialog
             openRandFileDiag.DefaultExt = "txt";
-
-            //Open file dialogue
-            //openRandFileDiag.ShowDialog();
+         
             //Declear open file
             OpenFileDialog open = new OpenFileDialog();
 

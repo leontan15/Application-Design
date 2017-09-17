@@ -1,0 +1,146 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace randNumbFileWrite
+{
+    public partial class randomNumberForm : Form
+    {
+        public randomNumberForm()
+        {
+            InitializeComponent();
+        }
+
+        private void calculateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Clear listbox
+
+                randBox.Items.Clear();
+
+                // Obtain input from quantity textbox
+                int qty;
+
+                // to hold qty
+                int.TryParse(randAmountTextbox.Text, out qty);
+                //Loop Counter
+                int count = 1;
+                // rand
+
+                //Calc Add rand numbers to list
+                Random rand = new Random();
+
+                while (count <= qty)
+                {
+                   
+                    
+                    
+                    // Add items to listbox
+                    randBox.Items.Add(" Line " + count.ToString() + " " + rand.Next(100));
+                    // Add to Loop
+                    count = count + 1;
+                    
+                }
+                          }
+            catch
+            {
+                MessageBox.Show("Invalid Input");
+            }
+        }
+
+        private void openButton_Click(object sender, EventArgs e)
+        {
+            //Declare varible for random numbers
+            string randomNumber;
+            //Declare vairble for streamreader
+            StreamReader inputFile;
+
+            // Restrict file name type in save dialog
+            saveRandFileDiag.Filter = "Text Files | *.txt";
+            // Set file default name to text type in dialog
+            saveRandFileDiag.DefaultExt = "txt";
+
+            //Open file dialogue
+            //openRandFileDiag.ShowDialog();
+            //Declear open file
+            OpenFileDialog open = new OpenFileDialog();
+
+
+            //Detect user selection
+            if (openRandFileDiag.ShowDialog() == DialogResult.OK)
+            {
+                //Declare numbers
+                //string randNumbers;
+                // Declare StreamReader varible
+                // StreamReader inputFile;
+                // Initial Directory
+                // openRandFileDiag.InitialDirectory = "C:\Data";
+
+                //open the file and get a streamreader object
+                inputFile = (File.OpenText(openRandFileDiag.FileName));
+                                
+                //Clear anything in list box
+                randBox.Items.Clear();
+                
+
+                //Read the contents
+                while (!inputFile.EndOfStream)
+                {
+                    //Get random number
+                    randomNumber = inputFile.ReadLine();
+                    // Add random number to listbox
+                    randBox.Items.Add(randomNumber);
+                }
+                //close
+                inputFile.Close();
+                
+            }
+           else {
+               MessageBox.Show("Invalid Input");
+                }
+             }
+           
+            
+            
+            
+
+
+        
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            // Displays the save file control
+            //saveRandFileDiag.ShowDialog();
+            // Varible 
+            StreamWriter outputFile;
+            // Opens files
+
+            //Create the selected file
+            outputFile = File.CreateText("randnumb.txt");
+
+            //Write
+            for (int count = 1; count <= 10; count++)
+            {
+                outputFile.WriteLine(count);
+            }
+            //if (saveRandFileDiag.ShowDialog() == DialogResult.OK)
+            outputFile.Close();
+             
+            
+            
+           // {
+                // Closed notification
+            //    MessageBox.Show("You Clicked Close");
+            //}
+
+        }
+    }
+}

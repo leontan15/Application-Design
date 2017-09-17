@@ -64,9 +64,9 @@ namespace randNumbFileWrite
             StreamReader inputFile;
 
             // Restrict file name type in save dialog
-            saveRandFileDiag.Filter = "Text Files | *.txt";
+            openRandFileDiag.Filter = "Text Files | *.txt";
             // Set file default name to text type in dialog
-            saveRandFileDiag.DefaultExt = "txt";
+            openRandFileDiag.DefaultExt = "txt";
 
             //Open file dialogue
             //openRandFileDiag.ShowDialog();
@@ -77,14 +77,9 @@ namespace randNumbFileWrite
             //Detect user selection
             if (openRandFileDiag.ShowDialog() == DialogResult.OK)
             {
-                //Declare numbers
-                //string randNumbers;
-                // Declare StreamReader varible
-                // StreamReader inputFile;
-                // Initial Directory
-                // openRandFileDiag.InitialDirectory = "C:\Data";
+                
 
-                //open the file and get a streamreader object
+                //open the file and get a streamreader object * make sure the target name is the open dialog
                 inputFile = (File.OpenText(openRandFileDiag.FileName));
                                 
                 //Clear anything in list box
